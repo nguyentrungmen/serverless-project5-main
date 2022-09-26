@@ -1,7 +1,7 @@
-org: mennt193
-app: serverless-mennt193-topic-app
+org: mennt1193
+app: serverless-mennt1193-topic-app
 # TODO: Change the name of the org 
-service: serverless-mennt193-topic-app
+service: serverless-mennt1193-topic-app
 
 plugins:
   - serverless-webpack
@@ -21,9 +21,9 @@ provider:
   # Use these variables in the functions and resouorces section below. For example, 
   # ${self:provider.environment.ATTACHMENT_S3_BUCKET}
   environment:
-    TOPICS_TABLE: Topics-${self:provider.stage}
+    TOPICS_TABLE: mennt1193-topics-${self:provider.stage}
     TOPICS_CREATED_AT_INDEX: CreatedAtIndex
-    ATTACHMENT_S3_BUCKET: serverless-mennt193-topic-images-${self:provider.stage}
+    ATTACHMENT_S3_BUCKET: serverless-mennt1193-topic-images-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
 
   logs:
@@ -130,7 +130,7 @@ functions:
         Action:
           - s3:PutObject
           - s3:GetObject
-        Resource: "arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*"
+        Resource: 'arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*'
       - Effect: Allow
         Action:
           - xray:PutTraceSegments
@@ -152,7 +152,8 @@ functions:
         Action:          
           - dynamodb:DeleteItem
           - dynamodb:GetItem
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TOPICS_TABLE}
+        Resource: 
+          - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TOPICS_TABLE}
       - Effect: Allow
         Action:
           - xray:PutTraceSegments
@@ -182,7 +183,7 @@ functions:
         Action:
           - s3:PutObject
           - s3:GetObject
-        Resource: "arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*"
+        Resource: 'arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*'
       - Effect: Allow
         Action:
           - xray:PutTraceSegments

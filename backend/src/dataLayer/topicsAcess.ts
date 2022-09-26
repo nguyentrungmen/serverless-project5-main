@@ -35,7 +35,7 @@ export  class TopicsAccess {
     // get topic items
     async getTopicItem(topicId, userId) {
         const result = await this.docClient.get({
-            TableName: this.topicsStorage,
+            TableName: this.topicsTable,
             Key: {
                 topicId,
                 userId
